@@ -226,5 +226,6 @@ delay:
         ld a, h
         or l
         jr nz, beep_loop
+        ei
     __endasm;
 }
