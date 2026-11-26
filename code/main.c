@@ -8,7 +8,7 @@
 unsigned char sprite_shift;
 unsigned char sprite_height;
 unsigned char main_sprite[16];
-unsigned char* sprite_data = main_sprite;
+unsigned short* sprite_data = main_sprite;
 unsigned short screen_addr;
 
 /*
