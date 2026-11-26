@@ -209,22 +209,22 @@ void beep(void)
         ld de, (_pitch)             ; Pitch
 
 beep_loop:
-        ld a,c
+        ld a, c
         xor 0x10                    ; toggle speaker
-        out (0xfe),a
-        ld c,a                      ; keep the new speaker state + border
+        out (0xfe), a
+        ld c, a                     ; keep the new speaker state + border
 
         push de
 delay:
         dec de
-        ld a,d
+        ld a, d
         or e
         jr nz,delay
         pop de
 
         dec hl
-        ld a,h
+        ld a, h
         or l
-        jr nz,beep_loop
+        jr nz, beep_loop
     __endasm;
 }
