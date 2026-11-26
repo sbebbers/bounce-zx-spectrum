@@ -43,9 +43,9 @@ int main(void)
     main_sprite[06] = 0b00011000;
     main_sprite[07] = 0b00000000;
 
-    char _x = 1;
-    char _y = 1;
-    char _h = 8;
+    unsigned char _x = 1;
+    unsigned char _y = 1;
+    unsigned char _h = 8;
 
     signed char _xDirection = 1;
     signed char _yDirection = 1;
@@ -91,7 +91,7 @@ void setPoint(unsigned char x, unsigned char y, unsigned char h)
         }
         else
         {
-            sprite_height = y + 1;
+            sprite_height = h + 1;
         }
     }
     else
@@ -169,8 +169,8 @@ move_up_scanline:
         ld a, h
         add a, 0x08
         ld h, a
-same_zone:
 
+same_zone:
         pop bc                    ; Reset line counter
         djnz draw_loop
     __endasm;
