@@ -10,6 +10,8 @@ unsigned char sprite_height;
 unsigned char main_sprite[16];
 unsigned short* sprite_data = main_sprite;
 unsigned short screen_addr;
+unsigned short pitch;
+unsigned short duration;
 
 /*
  * Forward declarations
@@ -17,6 +19,7 @@ unsigned short screen_addr;
 int main(void);
 void setPoint(unsigned char x, unsigned char y, unsigned char h);
 extern void drawSprite(void);
+extern void beep(void);
 
 /**
  * Main
@@ -49,6 +52,12 @@ int main(void)
 
     signed char _xDirection = 1;
     signed char _yDirection = 1;
+
+    // Example beeper code
+    pitch = 0x00a0;
+    duration = 0x0600;
+
+    beep();
 
     while(1)
     {
@@ -171,7 +180,51 @@ move_up_scanline:
         ld h, a
 
 same_zone:
-        pop bc                    ; Reset line counter
+        pop bc                      ; Reset line counter
         djnz draw_loop
+    __endasm;
+}
+
+/**
+ * Beep routine; set global pitch and duration as follows:
+ *   pitch -> lower value is higher pitch
+ *   duration -> lower value is shorter beep
+ *
+ * @param void
+ * @return void
+ * @author Ped7g
+ */
+void beep(void)
+{
+    __asm
+        di
+        ld a, (0x5C48)              ; border colour in a
+        rra
+        rra
+        rra
+        and 0x07
+        ld c,a                      ; c -> permanent border colour
+
+        ld hl, (_duration)          ; duration
+        ld de, (_pitch)             ; Pitch
+
+beep_loop:
+        ld a,c
+        xor 0x10                    ; toggle speaker
+        out (0xfe),a
+        ld c,a                      ; keep the new speaker state + border
+
+        push de
+delay:
+        dec de
+        ld a,d
+        or e
+        jr nz,delay
+        pop de
+
+        dec hl
+        ld a,h
+        or l
+        jr nz,beep_loop
     __endasm;
 }
