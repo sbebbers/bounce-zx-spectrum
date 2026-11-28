@@ -7,4 +7,4 @@ The source was never under version control, but I did put it in PasteBin [here](
 
 On 9th January 2018, I rebuilt it from scratch using z88dk with a vastly superior structure, i.e., a frame counter and better ball direction controls. Although the source is lost, it may be downloaded [here](https://spectrumcomputing.co.uk/entry/33409/ZX81/Bounce_Redux)
 
-This is my first real attempt to make a ZX Spectrum game that isn't in BASIC. It is mostly build in C using z88dk. I will use many of the ideas from Bounce Redux, but add colour, sound and even better ball handling.
+This is my first real attempt to make a ZX Spectrum game that isn't in BASIC. It is mostly built in C using z88dk to build the binaries. I will use many of the ideas from Bounce Redux, but add colour, sound and even better ball handling.
