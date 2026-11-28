@@ -100,7 +100,7 @@ void setPoint(unsigned char x, unsigned char y, unsigned char h)
         }
         else
         {
-            sprite_height = h + 1;
+            sprite_height = y + 1;
         }
     }
     else
